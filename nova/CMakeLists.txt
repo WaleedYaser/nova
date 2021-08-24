@@ -1,5 +1,3 @@
-cmake_minimum_required(VERSION 3.12)
-
 add_library(nova INTERFACE
 	include/nova/types.h
 	include/nova/math.h

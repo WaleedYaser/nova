@@ -151,74 +151,6 @@ namespace nova
     }
 
     inline static Mat3
-    mat3_transpose(const Mat3 &M)
-    {
-        return Mat3{
-            M[0][0], M[1][0], M[2][0],
-            M[0][1], M[1][1], M[2][1],
-            M[0][2], M[1][2], M[2][2]
-        };
-    }
-
-    inline static float
-    mat3_trace(const Mat3 &M)
-    {
-        return M[0][0] + M[1][1] + M[2][2];
-    }
-
-    inline static float
-    mat3_det(const Mat3 &M)
-    {
-        return
-            + M[0][0] * (M[1][1] * M[2][2] - M[1][2] * M[2][1])
-            - M[0][1] * (M[1][0] * M[2][2] - M[1][2] * M[2][0])
-            + M[0][2] * (M[1][0] * M[2][1] - M[1][1] * M[2][0]);
-    }
-
-    inline static Mat3
-    mat3_adj(const Mat3 &M)
-    {
-        return Mat3{
-            //[0][0]
-            + (M[1][1] * M[2][2] - M[1][2] * M[2][1]),
-            //[1][0]
-            - (M[0][1] * M[2][2] - M[0][2] * M[2][1]),
-            //[2][0]
-            + (M[0][1] * M[1][2] - M[0][2] * M[1][1]),
-
-            //[0][1]
-            - (M[1][0] * M[2][2] - M[1][2] * M[2][0]),
-            //[1][1]
-            + (M[0][0] * M[2][2] - M[0][2] * M[2][0]),
-            //[2][1]
-            - (M[0][0] * M[1][2] - M[0][2] * M[1][0]),
-
-            //[0][2]
-            + (M[1][0] * M[2][1] - M[1][1] * M[2][0]),
-            //[1][2]
-            - (M[0][0] * M[2][1] - M[0][1] * M[2][0]),
-            //[2][2]
-            + (M[0][0] * M[1][1] - M[0][1] * M[1][0])
-        };
-    }
-
-    inline static bool
-    mat3_invertible(const Mat3 &M)
-    {
-        return mat3_det(M) != 0.0f;
-    }
-
-    inline static Mat3
-    mat3_inverse(const Mat3 &M)
-    {
-        float d = mat3_det(M);
-        if (d == 0)
-            return Mat3{};
-
-        return (1.0f / d) * mat3_adj(M);
-    }
-
-    inline static Mat3
     mat3_translation_2d(float dx, float dy)
     {
         return Mat3{
@@ -423,5 +355,73 @@ namespace nova
             0, 1, s,
             0, 0, 1
         };
+    }
+
+    inline static Mat3
+    transpose(const Mat3 &M)
+    {
+        return Mat3{
+            M[0][0], M[1][0], M[2][0],
+            M[0][1], M[1][1], M[2][1],
+            M[0][2], M[1][2], M[2][2]
+        };
+    }
+
+    inline static float
+    trace(const Mat3 &M)
+    {
+        return M[0][0] + M[1][1] + M[2][2];
+    }
+
+    inline static float
+    det(const Mat3 &M)
+    {
+        return
+            + M[0][0] * (M[1][1] * M[2][2] - M[1][2] * M[2][1])
+            - M[0][1] * (M[1][0] * M[2][2] - M[1][2] * M[2][0])
+            + M[0][2] * (M[1][0] * M[2][1] - M[1][1] * M[2][0]);
+    }
+
+    inline static Mat3
+    adj(const Mat3 &M)
+    {
+        return Mat3{
+            //[0][0]
+            + (M[1][1] * M[2][2] - M[1][2] * M[2][1]),
+            //[1][0]
+            - (M[0][1] * M[2][2] - M[0][2] * M[2][1]),
+            //[2][0]
+            + (M[0][1] * M[1][2] - M[0][2] * M[1][1]),
+
+            //[0][1]
+            - (M[1][0] * M[2][2] - M[1][2] * M[2][0]),
+            //[1][1]
+            + (M[0][0] * M[2][2] - M[0][2] * M[2][0]),
+            //[2][1]
+            - (M[0][0] * M[1][2] - M[0][2] * M[1][0]),
+
+            //[0][2]
+            + (M[1][0] * M[2][1] - M[1][1] * M[2][0]),
+            //[1][2]
+            - (M[0][0] * M[2][1] - M[0][1] * M[2][0]),
+            //[2][2]
+            + (M[0][0] * M[1][1] - M[0][1] * M[1][0])
+        };
+    }
+
+    inline static bool
+    invertible(const Mat3 &M)
+    {
+        return det(M) != 0.0f;
+    }
+
+    inline static Mat3
+    inverse(const Mat3 &M)
+    {
+        float d = det(M);
+        if (d == 0)
+            return Mat3{};
+
+        return (1.0f / d) * adj(M);
     }
 }

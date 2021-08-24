@@ -108,7 +108,10 @@ namespace nova
 	inline static Mat2
 	operator/(const Mat2 &M, float f)
 	{
-		return M * 1.0f / f;
+        return Mat2{
+            M[0][0] / f, M[0][1] / f,
+            M[1][0] / f, M[1][1] / f
+        };
 	}
 
 	inline static Mat2

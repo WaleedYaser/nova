@@ -10,6 +10,5 @@ if ( MSVC )
 endif()
 
 add_subdirectory(nova)
-
-add_executable(nova-exe main.cpp)
-target_link_libraries(nova-exe PUBLIC nova)
+add_subdirectory(external/doctest)
+add_subdirectory(utests)
