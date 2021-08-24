@@ -1,0 +1,40 @@
+name: build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+
+      - name: Configure debug
+        run: cmake . -B build -DCMAKE_BUILD_TYPE=Debug
+
+      - name: Build debug
+        run: cmake --build build --config Debug -j
+
+      - name: Test debug
+        run: ./build/bin/Debug/utests
+
+      - name: Configure release
+        run: cmake . -B build -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build release
+        run: cmake --build build --config Release -j
+
+      - name: Test release
+        run: ./build/bin/Release/utests
