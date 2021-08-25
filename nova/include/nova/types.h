@@ -30,7 +30,7 @@
 	#pragma warning( disable : 4201 ) // warning C4201: nonstandard extension used: nameless struct/union
 #elif NOVA_GCC
 	#pragma GCC diagnostic push
-	#pragma GCC diagnostic ignored 4201
+	#pragma GCC diagnostic ignored -W4201
 #endif
 
 namespace nova
