@@ -15,7 +15,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-latest, ubuntu-latest]
+        # TODO: add more operating systems and compilers
+        os: [windows-latest, ubuntu-latest, macOS-latest]
     steps:
       - uses: actions/checkout@v2
         with:
