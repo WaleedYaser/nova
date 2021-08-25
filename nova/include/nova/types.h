@@ -25,14 +25,14 @@ namespace nova
 		struct { float r, g, b; };
 		struct { float width, height, depth; };
 
-		struct { Vec2 xy; float _z; };
-		struct { float _x; Vec2 yz; };
+		struct { Vec2 xy; float _pad0; };
+		struct { float _ignore1; Vec2 yz; };
 
-		struct { Vec2 uv; float _w; };
-		struct { float _u; Vec2 vw; };
+		struct { Vec2 uv; float _pad1; };
+		struct { float _pad2; Vec2 vw; };
 
-		struct { Vec2 rg; float _b; };
-		struct { float _r; Vec2 gb; };
+		struct { Vec2 rg; float _pad3; };
+		struct { float _pad4; Vec2 gb; };
 
 		float values[3];
 
@@ -45,19 +45,19 @@ namespace nova
 		struct { float x, y, z, w; };
 		struct { float r, g, b, a; };
 
-		struct { Vec3 xyz; float _w; };
-		struct { float _x; Vec3 yzw; };
+		struct { Vec3 xyz; float _pad0; };
+		struct { float _pad1; Vec3 yzw; };
 
-		struct { Vec3 rgb; float _a; };
-		struct { float _r; Vec3 gba; };
+		struct { Vec3 rgb; float _pad2; };
+		struct { float _pad3; Vec3 gba; };
 
 		struct { Vec2 xy; float _zw[2]; };
-		struct { float _x; Vec2 yz; float _w; };
-		struct { float _xy[2]; Vec2 zw; };
+		struct { float _pad4; Vec2 yz; float _pad5; };
+		struct { float _pad6[2]; Vec2 zw; };
 
-		struct { Vec2 rg; float _ba[2]; };
-		struct { float _r; Vec2 gb; float _a; };
-		struct { float _rg[2]; Vec2 ba; };
+		struct { Vec2 rg; float _pad7[2]; };
+		struct { float _pad8; Vec2 gb; float _pad9; };
+		struct { float _pad10[2]; Vec2 ba; };
 
 		float values[4];
 
