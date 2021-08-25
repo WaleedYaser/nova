@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  unit-tests:
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
