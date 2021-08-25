@@ -1,4 +1,4 @@
-name: build
+name: unit-tests
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  unit-tests:
+  build:
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
