@@ -5,9 +5,6 @@
 NOVA_MSVC_SUPPRESS_WARNING_PUSH
 NOVA_MSVC_SUPPRESS_WARNING(4201) // warning C4201: nonstandard extension used: nameless struct/union
 
-NOVA_GCC_SUPPRESS_WARNING_PUSH
-NOVA_GCC_SUPPRESS_WARNING("-Wgnu-anonymous-struct")
-
 namespace nova
 {
 	union Vec2
@@ -93,5 +90,4 @@ namespace nova
 	};
 }
 
-NOVA_GCC_SUPPRESS_WARNING_PUSH
 NOVA_MSVC_SUPPRESS_WARNING_PUSH
