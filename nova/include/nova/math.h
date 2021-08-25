@@ -1,17 +1,17 @@
 #pragma once
 
-#include <math.h>
+#include "nova/defines.h"
 
 extern "C" {
 	// forward declaration (cmath)
-#if defined(_WIN32) || defined(_WIN64)
+#if NOVA_MSVC
 	double sqrt(double);
 	double sin(double);
 	double cos(double);
 	double tan(double);
 	double asin(double);
 	double atan2(double, double);
-#elif defined(__linux__)
+#elif NOVA_GCC
 	// TODO[Waleed]: investigate about throw()
 	double sqrt(double) throw();
 	double sin(double) throw();

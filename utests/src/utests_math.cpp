@@ -1,6 +1,7 @@
 #include <nova/math.h>
 
 #include <doctest/doctest.h>
+#include <math.h>
 
 TEST_CASE("[nova]: consts")
 {
