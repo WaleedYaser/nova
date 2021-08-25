@@ -1,7 +1,37 @@
 #pragma once
 
-#pragma warning( push )
-#pragma warning( disable : 4201 ) // warning C4201: nonstandard extension used: nameless struct/union
+// Detecting compiler version are taken from: https://github.com/cxxstuff/cxx_detect
+
+#define NOVA_CLANG 0
+#define NOVA_GCC   0
+#define NOVA_MSVC  0
+
+#define NOVA_MAKE_VER(MAJOR, MINOR, PATCH) ((MAJOR) * 10000000 + (MINOR) * 100000 + (PATCH))
+
+#if defined(_MSC_VER) && defined(_MSC_FULL_VER)
+	#undef NOVA_MSVC
+	#if _MSC_VER == _MSC_FULL_VER / 10000
+		#define NOVA_MSVC NOVA_MAKE_VER(_MSC_VER / 100, _MSC_VER % 100, _MSC_FULL_VER % 10000)
+	#else
+		#define NOVA_MSVC NOVA_MAKE_VER(_MSC_VER / 100, (_MSC_FULL_VER / 100000) % 100, _MSC_FULL_VER % 100000)
+	#endif
+#elif defined(__GNUC__) && defined(__GNUC_MINOR__) && defined(__GNUC_PATCHLEVEL__)
+	#undef NOVA_GCC
+	#define NOVA_GCC NOVA_MAKE_VER(__GNUC__, __GNUC_MINOR__, __GNUC_PATCHLEVEL__)
+#elif defined(__clang__) && defined(__clang_minor__)
+	#undef NOVA_CLANG
+	#define NOVA_CLANG NOVA_MAKE_VER(__clang_major__, __clang_minor__, __clang_patchlevel__)
+#else
+	#error "[nova/types.h] Unable to detect C/C++ compiler."
+#endif
+
+#if NOVA_MSVC
+	#pragma warning( push )
+	#pragma warning( disable : 4201 ) // warning C4201: nonstandard extension used: nameless struct/union
+#elif NOVA_GCC
+	#pragma GCC diagnostic push
+	#pragma GCC diagnostic ignored 4201
+#endif
 
 namespace nova
 {
@@ -88,4 +118,8 @@ namespace nova
 	};
 }
 
-#pragma warning( pop )
+#if NOVA_MSVC
+	#pragma warning( pop )
+#elif NOVA_GCC
+	#pragma GCC diagnostic pop
+#endif
