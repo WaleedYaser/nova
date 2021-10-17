@@ -110,4 +110,11 @@ namespace nova
 	{
 		return (a.x * b.y - a.y * b.x);
 	}
+
+	// TODO: add unittests
+	inline static Vec2
+	abs(const Vec2 &v)
+	{
+		return Vec2{abs(v.x), abs(v.y)};
+	}
 }

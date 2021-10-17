@@ -103,4 +103,17 @@ namespace nova
     {
         return ::atan2(y, x);
     }
+
+    inline static float
+    abs(float f)
+    {
+        return f < 0 ? f * -1 : f;
+    }
+
+	// TODO: add unittests
+    inline static double
+    abs(double f)
+    {
+        return f < 0 ? f * -1 : f;
+    }
 }
